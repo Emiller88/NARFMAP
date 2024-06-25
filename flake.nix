@@ -1,44 +1,48 @@
 {
-  description = "Description for the project";
+  description = "Fork of DRAGMAP, the first of it's name, merger of PRs, cutter of releases, takeoverer of worlds";
 
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
-    nci.url = "github:yusdacra/nix-cargo-integration";
-    nix2container.url = "github:nlewo/nix2container";
-    nix2container.inputs.nixpkgs.follows = "nixpkgs";
-    mk-shell-bin.url = "github:rrbutani/nix-mk-shell-bin";
-    treefmt-nix.url = "github:numtide/treefmt-nix";
-  };
+  inputs.nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*.tar.gz";
+  inputs.flake-parts.url = "github:hercules-ci/flake-parts";
 
-  outputs = inputs @ {
-    flake-parts,
-    nci,
-    ...
-  }:
+  outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {
-      imports = [
-        inputs.nci.flakeModule
-        inputs.treefmt-nix.flakeModule
-        ./crates.nix
+      flake = {
+        # TODO Put your original flake attributes here.
+      };
+      systems = [
+        # systems for which you want to build the `perSystem` attributes
+        "x86_64-linux"
+        # TODO "aarch64-linux" "x86_64-darwin" "aarch64-darwin"
       ];
-      systems = ["x86_64-linux" "i686-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin"];
-
       perSystem = {
         config,
         pkgs,
+        system,
         ...
-      }: let
-        cargoToml = builtins.fromTOML (builtins.readFile ./Cargo.toml);
-        crateName = cargoToml.package.name;
-        crateOutputs = config.nci.outputs.${crateName};
-      in {
-        packages.default = crateOutputs.packages.release;
+      }: {
+        #
+        devShells.default = pkgs.mkShell {
+          packages = with pkgs; [
+            boost
+            gnumake
+            gtest
+            zlib
+          ];
 
-        devShells.default = crateOutputs.devShell;
+          env = {
+            BOOST_INCLUDEDIR = "${pkgs.lib.getDev pkgs.boost}/include";
+            BOOST_LIBRARYDIR = "${pkgs.lib.getLib pkgs.boost}/lib";
+            GTEST_INCLUDEDIR = "${pkgs.lib.getDev pkgs.gtest}/include";
+            GTEST_LIBRARYDIR = "${pkgs.lib.getLib pkgs.gtest}/lib";
+            GTEST_ROOT = "${pkgs.gtest}";
+            LD_LIBRARY_PATH = "${pkgs.lib.getLib pkgs.gtest}/lib";
+            LIBCLANG_PATH = "${pkgs.lib.getLib pkgs.llvmPackages.libclang.lib}/lib";
+          };
+        };
 
-        packages.dragen = pkgs.stdenv.mkDerivation {
+        packages.dragmap = pkgs.stdenv.mkDerivation {
           pname = "NARFMAP";
-          version = cargoToml.package.version;
+          version = "1.4.0";
 
           src = ./.;
 
@@ -60,6 +64,8 @@
           '';
 
           env = {
+            HAS_GTEST = 0;
+            STATIC = 1;
             BOOST_INCLUDEDIR = "${pkgs.lib.getDev pkgs.boost}/include";
             BOOST_LIBRARYDIR = "${pkgs.lib.getLib pkgs.boost}/lib";
             GTEST_INCLUDEDIR = "${pkgs.lib.getDev pkgs.gtest}/include";
@@ -70,56 +76,15 @@
           };
 
           meta = with pkgs.lib; {
-            homepage = "https://github.com/nixvital/nix-based-cpp-starterkit";
+            homepage = "https://github.com/bioinformaticsorphanage/NARFMAP";
             description = ''
-              A template for Nix based C++ project setup.";
+              The Dragen mapper/aligner Open Source Software.
             '';
-            licencse = licenses.mit;
-            platforms = with platforms; linux ++ darwin;
-            maintainers = [maintainers.breakds];
+            licencse = licenses.gpl3;
+            platforms = with platforms; linux;
+            maintainers = [maintainers.edmundmiller];
           };
         };
-
-        # FIXME
-        # devShells.dragen = {
-        #   name = "NARFMAP";
-
-        #   imports = [
-        #   ];
-
-        #   packages = [
-        #     pkgs.boost
-        #     pkgs.gnumake
-        #     pkgs.gtest
-        #     pkgs.zlib
-        #   ];
-        #   env = {
-        #     BOOST_INCLUDEDIR = "${pkgs.lib.getDev pkgs.boost}/include";
-        #     BOOST_LIBRARYDIR = "${pkgs.lib.getLib pkgs.boost}/lib";
-        #     GTEST_INCLUDEDIR = "${pkgs.lib.getDev pkgs.gtest}/include";
-        #     GTEST_LIBRARYDIR = "${pkgs.lib.getLib pkgs.gtest}/lib";
-        #     GTEST_ROOT = "${pkgs.gtest}";
-        #     LD_LIBRARY_PATH = "${pkgs.lib.getLib pkgs.gtest}/lib";
-        #   };
-        # };
-
-        treefmt.config = {
-          projectRootFile = "flake.nix";
-
-          programs.alejandra.enable = true;
-          programs.clang-format.enable = true;
-          programs.deadnix.enable = true;
-          programs.prettier.enable = true;
-          programs.prettier.settings = {
-            editorconfig = true;
-            embeddedLanguageFormatting = "auto";
-          };
-        };
-      };
-      flake = {
-        # The usual flake attributes can be defined here, including system-
-        # agnostic ones like nixosModule and system-enumerating ones, although
-        # those are more easily expressed in perSystem.
       };
     };
 }
