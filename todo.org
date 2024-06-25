@@ -1,3 +1,8 @@
 #+title: Todo
 
 https://crates.io/crates/clap_mangen
+
+* Build System
+** TODO Add treefmt back in
+** TODO Use https://flake.parts/ again
+** TODO Use build.zig
