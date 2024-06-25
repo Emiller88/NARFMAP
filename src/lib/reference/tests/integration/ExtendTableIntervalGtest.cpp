@@ -41,7 +41,7 @@ TEST(ExtendTableInterval, SetOfTwo)
   uint64_t  s4[]     = {0x7bf9df58fa123456, 0x7bf9fedcfb987654};
   uint64_t* ss[]     = {s1, s2, s3, s4};
   uint32_t  esl[][3] = {
-       {0, 0x56987654, 0x1234}, {0x12, 0x56987654, 0x34}, {0, 0x56, 0x34987654}, {0, 0x123456, 0x987654}};
+      {0, 0x56987654, 0x1234}, {0x12, 0x56987654, 0x34}, {0, 0x56, 0x34987654}, {0, 0x123456, 0x987654}};
   for (unsigned i = 0; 4 > i; ++i) {
     const auto begin = reinterpret_cast<const HashRecord*>(ss[i]);
     const auto end   = begin + 2;
@@ -94,7 +94,7 @@ TEST(ExtendTableInterval, SetOfThree)
   uint64_t  s5[]    = {0xc851b149f900001a, 0xc851b148fabb10ae, 0xc851b14afb01f3b0};
   uint64_t* ss[]    = {s1, s2, s3, s4, s5};
   uint32_t  sl[][2] = {
-       {5777464, 92356}, {4231852, 80514}, {0x27c4fc2, 106658}, {0x1b46391e, 96576}, {0x1abb10ae, 127920}};
+      {5777464, 92356}, {4231852, 80514}, {0x27c4fc2, 106658}, {0x1b46391e, 96576}, {0x1abb10ae, 127920}};
   for (unsigned i = 0; 5 > i; ++i) {
     const auto begin = reinterpret_cast<const HashRecord*>(ss[i]);
     const auto end   = begin + 3;

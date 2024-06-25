@@ -1,9 +1,5 @@
 {...}: {
-  perSystem = {
-    pkgs,
-    config,
-    ...
-  }: let
+  perSystem = {pkgs, ...}: let
     cargoToml = builtins.fromTOML (builtins.readFile ./Cargo.toml);
     crateName = cargoToml.package.name;
   in {

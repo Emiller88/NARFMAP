@@ -109,7 +109,7 @@ private:
     {
       return os << "Executor(" << e.maxThreads_ << "mt," << e.threadsIn_ << "ti," << e.complete_ << "c)";
     }
-  } * head_, *tail_;
+  } *                     head_, *tail_;
   static std::mutex       mutex_;
   std::condition_variable stateChangedCondition_;
 

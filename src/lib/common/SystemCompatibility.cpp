@@ -323,7 +323,7 @@ int64_t clock()
 
 bool isLittleEndian()
 {
-  const uint64_t v = 0x0706050403020100;
+  const uint64_t             v = 0x0706050403020100;
   const unsigned char* const p = reinterpret_cast<const unsigned char*>(&v);
   for (unsigned i = 0; i < sizeof(v); ++i) {
     if (p[i] != i) {
@@ -354,7 +354,7 @@ uint64_t getFileSize(const PathCharType* filePath)
 boost::filesystem::path getModuleFileName()
 {
   char szBuffer[10240];
-  int readBytes = readlink("/proc/self/exe", szBuffer, sizeof(szBuffer));
+  int  readBytes = readlink("/proc/self/exe", szBuffer, sizeof(szBuffer));
   DRAGEN_OS_ASSERT_MSG(-1 != readBytes, "TODO: handle the readlink error: " << errno);
   // readlink does not zero-terminate the string.
   szBuffer[readBytes] = 0;

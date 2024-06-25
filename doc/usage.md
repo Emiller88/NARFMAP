@@ -25,4 +25,3 @@ Or directly to a file :
 ## Align single-end reads :
 
     dragen-os -r /home/data/reference/ -1 reads_1.fastq.gz  >  result.sam
-
