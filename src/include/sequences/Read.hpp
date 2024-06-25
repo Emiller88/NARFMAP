@@ -15,6 +15,7 @@
 #ifndef SEQUENCES_READ_HPP
 #define SEQUENCES_READ_HPP
 
+#include <cstdint>
 #include <iostream>
 #include <string>
 #include <vector>

@@ -14,6 +14,8 @@
 #define __READ_GROUP_LIST_HPP__
 
 #include "dragen_exception.hpp"
+#include <cstdint>
+
 class ReadGroupList {
 public:
   const std::string &getReadGroupName(const uint16_t idx) const {
