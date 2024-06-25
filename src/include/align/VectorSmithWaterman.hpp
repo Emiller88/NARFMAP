@@ -66,10 +66,7 @@ public:
 #endif
   }
 
-  ~VectorSmithWaterman()
-  {
-    free(sswScoringMat_);
-  }
+  ~VectorSmithWaterman() { free(sswScoringMat_); }
 
   uint16_t align(
       const unsigned char* queryBegin,

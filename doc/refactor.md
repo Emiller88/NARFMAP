@@ -2,7 +2,6 @@
 
 Ran `config.mk` through chatgpt4
 
-
 ## Refactoring Explanation:
 
 1. The checks for certain environment variables and command-line parameters (like `GTEST_INCLUDEDIR`, `GTEST_LIBRARYDIR`, `BOOST_INCLUDEDIR`, `BOOST_LIBRARYDIR`) are repeated, which can be refactored into a function-like macro for reusability.
@@ -134,7 +133,7 @@ GTEST_LDFLAGS+=-lgtest_main -lgtest
 
 sources := $(wildcard $(DRAGEN_OS_SRC_DIR)/*.cpp)
 programs := $(sources:$(DRAGEN_OS_SRC_DIR)/%.cpp=%)
-``` 
+```
 
 Diff:
 Given the amount of code and the complexity of the original file, it would be impractical to display all the exact diffs here. However, applying the above refactoring suggestions would result in removal of commented code blocks, consolidation of repeated checks into function-macros, and cleanliness and clarity in variable assignments and conditionals.

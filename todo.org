@@ -3,7 +3,8 @@
 https://crates.io/crates/clap_mangen
 
 * Build System
-** TODO Add treefmt back in
+** DONE Add treefmt back in
+CLOSED: [2024-06-25 Tue 12:17]
 ** DONE Use https://flake.parts/ again
 CLOSED: [2024-06-25 Tue 12:15]
 ** TODO Use build.zig

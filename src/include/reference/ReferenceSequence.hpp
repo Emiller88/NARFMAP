@@ -199,14 +199,8 @@ public:
     return getRcBaseNoCheck(position);
   }
 
-  const unsigned char* getData() const
-  {
-    return data_;
-  }
-  size_t getSize() const
-  {
-    return size_;
-  }
+  const unsigned char* getData() const { return data_; }
+  size_t               getSize() const { return size_; }
   /// decode 4 bits into AIUPAC character using only 4 LSB
   static char decodeBase(unsigned char base);
   /// translate into 2 bits encoding using only 4 LSB

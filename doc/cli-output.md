@@ -1,4 +1,3 @@
-
 ```
 dragenos -r <reference> -b <base calls> [optional arguments]
 

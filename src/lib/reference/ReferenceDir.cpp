@@ -53,7 +53,7 @@ typename ReferenceDir7::UcharPtr ReferenceDir7::ReadFileIntoBuffer(
   size = file.tellg();
   file.seekg(0, file.beg);
 
-  UcharPtr bufPtr(new uint8_t[size], [](uint8_t* p) -> void { delete[](p); });
+  UcharPtr bufPtr(new uint8_t[size], [](uint8_t* p) -> void { delete[] (p); });
   file.read(reinterpret_cast<char*>(bufPtr.get()), size);
   if (!file) {
     //    THROW(DragenException, "Could not load reference - could not read ", path);
