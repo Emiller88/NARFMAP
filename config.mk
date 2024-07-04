@@ -188,6 +188,10 @@ endif # ASAN
 
 LDFLAGS+= -lz -lrt -lgomp -lpthread
 
+ifdef STATIC
+LDFLAGS+= -static
+endif
+
 ifdef STATIC_LIBCPP
 LDFLAGS+= -static-libstdc++
 else
