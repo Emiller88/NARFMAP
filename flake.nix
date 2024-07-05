@@ -68,7 +68,8 @@
 
           env = {
             HAS_GTEST = 0;
-            STATIC = 1;
+            # FIXME nix and static compiling doesn't seem to be working
+            # STATIC = 1;
             BOOST_INCLUDEDIR = "${pkgs.lib.getDev pkgs.boost}/include";
             BOOST_LIBRARYDIR = "${pkgs.lib.getLib pkgs.boost}/lib";
             GTEST_INCLUDEDIR = "${pkgs.lib.getDev pkgs.gtest}/include";
