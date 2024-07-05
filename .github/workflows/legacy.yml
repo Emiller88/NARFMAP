@@ -1,6 +1,9 @@
-name: C/C++ CI
+name: dragen-os build
+# using make and C/C++
 
 on:
+  release:
+    types: [published]
   pull_request:
     branches:
       - main
@@ -17,7 +20,10 @@ jobs:
       - name: Install dependancies
         run: sudo apt-get install -y libboost-all-dev libgtest-dev
       - name: make (compile and launch unit tests)
-        run: make
+        run: make -j 2
+        env:
+          HAS_GTEST: 0
+          STATIC: 1
       - name: make install
         run: sudo make install
       - uses: actions/upload-artifact@v3
