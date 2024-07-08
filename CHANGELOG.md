@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.2] - 2024-07-07
+
+### Fixed
+
+- Add a missing import to fix Bioconda build [19e3063](https://github.com/bioinformaticsorphanage/NARFMAP/commit/19e3063)
+
 ## [1.4.1] - 2024-07-05
 
 ### Changed
@@ -45,7 +51,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - mapq0 fix
 
-[unreleased]: https://github.com/Emiller88/NARFMAP/compare/v1.4.1...HEAD
+[unreleased]: https://github.com/Emiller88/NARFMAP/compare/v1.4.2...HEAD
+[1.4.2]: https://github.com/bioinformaticsorphanage/NARFMAP/compare/1.4.1...1.4.2
 [1.4.1]: https://github.com/bioinformaticsorphanage/NARFMAP/compare/1.4.0...1.4.1
 [1.4.0]: https://github.com/Emiller88/NARFMAP/compare/v1.3.1...v1.4.0
 [1.3.1]: https://github.com/Emiller88/NARFMAP/compare/v1.3.0...v1.3.1
